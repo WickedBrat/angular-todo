@@ -1,0 +1,9 @@
+<div class="sliderMenu grayBgColor">
+  <div class="sliderHeader">Online users - {{ onlineUsers.length}}</div>
+  <div *ngIf="onlineUsers">
+    <div class="userInfo" *ngFor="let user of onlineUsers">
+      <div class="userImg"><i class="far fa-user"></i></div>
+      <div class="userName">{{ user.name }}</div>
+    </div>
+  </div>
+</div>

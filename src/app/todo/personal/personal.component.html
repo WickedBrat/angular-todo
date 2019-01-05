@@ -1,0 +1,58 @@
+<div class="col-md-6 col-sm-12" style="max-width:100%;">
+  <div class="wd95 addPaddTopBottom">
+    <div class="sectionHeader">Personal todos</div>
+    <div class="todoWrapper">
+      <div class="formInput"><input class="input" data-test="input-private" placeholder="What needs to be done?" value=""
+          [(ngModel)]="privateTodoText" (keyup.enter)="addTodoItem()"><i class="downArrow fa fa-angle-down"></i></div>
+      <div class="todoListwrapper">
+        <ul *ngIf="privateTodoItems && display==='all'">
+          <li *ngFor="let todoItem of privateTodoItems">
+            <div class="view" (click)="updateTodoItem(todoItem.id, todoItem.is_completed)">
+              <div class="round" *ngIf="todoItem.is_completed"><input type="checkbox" id="{{ todoItem.id }}" checked><label
+                  for="{{ todoItem.id }}"></label>)</div>
+              <div class="round" *ngIf="!todoItem.is_completed"><input type="checkbox" id="{{ todoItem.id }}"><label
+                  for="{{ todoItem.id }}"></label>)</div>
+            </div>
+            <div class="labelContent" (click)="updateTodoItem(todoItem.id, todoItem.is_completed)">
+              <div *ngIf="todoItem.is_completed"><s>{{ todoItem.text }}</s></div>
+              <div *ngIf="!todoItem.is_completed">{{ todoItem.text }}</div>
+            </div><button class="closeBtn" (click)="removePrivateTodoItem(todoItem.id)">x</button>
+          </li>
+        </ul>
+        <ul *ngIf="completed && display==='completed'">
+          <li *ngFor="let todoItem of completed">
+            <div class="view" (click)="updateTodoItem(todoItem.id, todoItem.is_completed)">
+              <div class="round" *ngIf="todoItem.is_completed"><input type="checkbox" id="{{ todoItem.id }}" checked><label
+                  for="{{ todoItem.id }}"></label>)</div>
+              <div class="round" *ngIf="!todoItem.is_completed"><input type="checkbox" id="{{ todoItem.id }}"><label
+                  for="{{ todoItem.id }}"></label>)</div>
+            </div>
+            <div class="labelContent" (click)="updateTodoItem(todoItem.id, todoItem.is_completed)">
+              <div><s>{{ todoItem.text }}</s></div>
+            </div><button class="closeBtn" (click)="removePrivateTodoItem(todoItem.id)">x</button>
+          </li>
+        </ul>
+        <ul *ngIf="active && display==='active'">
+          <li *ngFor="let todoItem of active">
+            <div class="view" (click)="updateTodoItem(todoItem.id, todoItem.is_completed)">
+              <div class="round" *ngIf="todoItem.is_completed"><input type="checkbox" id="{{ todoItem.id }}" checked><label
+                  for="{{ todoItem.id }}"></label>)</div>
+              <div class="round" *ngIf="!todoItem.is_completed"><input type="checkbox" id="{{ todoItem.id }}"><label
+                  for="{{ todoItem.id }}"></label>)</div>
+            </div>
+            <div class="labelContent" (click)="updateTodoItem(todoItem.id, todoItem.is_completed)">
+              <div>{{ todoItem.text }}</div>
+            </div><button class="closeBtn" (click)="removePrivateTodoItem(todoItem.id)">x</button>
+          </li>
+        </ul>
+      </div>
+      <div class="footerList"><span> {{ active.length }} items left </span>
+        <ul>
+          <li><a [ngClass]="{'selected': display==='all'}" (click)="toggle('all')">All</a></li>
+          <li><a [ngClass]="{'selected': display==='active'}" class="removePaddLeft" (click)="toggle('active')">Active</a></li>
+          <li><a [ngClass]="{'selected': display==='completed'}" class="removePaddLeft" (click)="toggle('completed')">Completed</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
